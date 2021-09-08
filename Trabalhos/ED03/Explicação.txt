@@ -1,0 +1,95 @@
+ED: trabalho nº_3
+
+Avaliação de expressões
+
+*Expressão pré-fixa ---(E)
+  - é ambígua 
+*Expressão pós-fixa ---(E')
+  - não tem ambiguidade 
+
+O que fazer? 
+
+1ª parte:
+
+ - Converter uma expressão pré-fixa(E) em pós-fixa(E') ================> PILHA DE OPERADORES
+ 
+2ª parte:
+
+ - Usar E' + valores das variáveis -> (pilha) -> avaliar a expressão ==> PILHA
+
+Como Fazer?
+
+pilha_01: "+,-,*,/,(,)"
+
+ EX: A = 4
+     B = 5
+     C = 2
+    
+     PRÉ-FIXA         PÓS-FIXA
+     (A + B) * C  |  A B + C *
+     -----------> | <----------
+     ENTRADA      |       SAÍDA
+
+
+ Sempre que encotrar uma variável, COLOCAR NUMA STRING DE RESPOSTA
+ Sempre que encontrar um operador, COLOCAR NA PILHA DE OPERADORES
+   Critérios de prioridade:
+     2 -> *,/
+     1 -> +,-
+     0 -> (
+ Para um operador entrar na pilha ele deve obedecer a outro critério só pode entrar operadores com
+ prioridade maior ou igual do que o atual, se o operador não tiver permição de entrar na pilha ele
+ vai para a string de resposta.
+    -> )
+    O 'fecha parenteses' é um caso especial, quando ele é colocado na pilha, varre fazendo pops até
+    encontrar o 'abre parenteses' e, todos os operadores que foram "POPados" da pilha são adicionados
+    à string de resposta. Quando ')' encontra '(' ambos saem da pilha.
+
+Quando a expressão chga ao fim faz o esvaziamento da pilha (pop...pop...pop...) para cada pop,
+coloca-se o elemento no String de saída
+
+SAÍDA: A B + C *
+       4 5 + 2 * - (4,5,SOMA)
+       9 2 * ----- (9,2,MULTIPLICA)
+       18
+
+pilha_02:
+ Processa a expressão pós-fixa.
+
+ Prencher a pilha com valores, no final do processo deve restar apenas um valor dentro da pilha, e deve
+ ser o valor com a resposta.
+
+ PS: As variáveis DEVEM TER VALORES
+ PS': Nas operações de '-' e '/' a ordem dos pops importa. (2º pop - 1º pop)
+
+ Quando encontrar um OPERADOR fazer 2 POPS
+
+A B + C * 
+4 5 + 2 * | Pilha = {4}
+4 5 + 2 * | Pilha = {4,5}
+4 5 + 2 * | Pilha = {} ----- (POP, POP, aplica operador)
+4 5 + 2 * | Pilha = {9} -----(retorna para pilha)
+4 5 + 2 * | Pilha = {9, 2}
+4 5 + 2 * | Pilha = {} ----- (POP, POP, aplica operador)
+4 5 + 2 * | Pilha = {18} -----(retorna para pilha)
+
+FUNCIONAMENTO:
+ - Pelo prompt
+  * escrever uma expressão OU
+  * fornecer valor a uma variável
+
+Se fornecer uma expressão, usa o primeiro exemplo
+ Sintaxe no prompt: 
+   >> A = 2 entender que ta criando uma variavel A com valor 2
+   >> B = 5 entender que ta criando uma variavel B com valor 5
+   >> (A + B) * A entender que deve usar as variaveis A e B ja criadas para processar a expressão.
+   Ou seja, é para tratar da excessão de tentar uma expressão sem ter definido as variáveis.
+
+Pode-se usar de artifícios para definir as entradas como por exemplo, definir uma sintaxe que indiquem
+que não é uma expressão para ser avalidada.
+  EX:
+    ~A 5 entender que ta criando uma variavel A com valor 5
+     A <= 5 entender que ta criando uma variavel A com valor 5
+
+PODE CRIAR UMA SINTAXE CONTANTO QUE EXPLICITE PARA O PROFESSOR QUANDO ELE ENTRAR NO SISTEMA. (UM GUIA 
+SIMPLES PARA ENSINAR A USAR AS FUNIONALIDADES)
